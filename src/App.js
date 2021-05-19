@@ -1,9 +1,13 @@
+import React, { useRef, useState } from 'react';
 import './App.css'
+
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/analytics'
+
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useCollectionData} from 'react-firebase-hooks/firestore'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 firebase.initializeApp({
     apiKey: "AIzaSyBI3E_8900ttRXF-w8yUy_bjG2A3GT9scs",
@@ -20,40 +24,48 @@ const firestore = firebase.firestore()
 
 function App() {
   const [user] = useAuthState(auth)
+
   return (
     <div className="App">
-      <header className="App-header">
-     
+      <header>
+        <h1>Super Duper Chat</h1>
+        <SignOut />
       </header>
-      <section>{ user ? <Chatroom /> : <Signin /> }</section>
+      <section>
+        {user ? <ChatRoom /> : <SignIn />}
+      </section>
     </div>
   )
 }
-function Signin() {
+
+function SignIn() {
+
   const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    auth.signInWithPopup(provider)
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
   }
   return (
-    <button onClick={signInWithGoogle}>Sign In With Google</button>
+    <>
+      <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
+    </>
   )
 }
 
 function SignOut() {
   return auth.currentUser && (
-    <button onClick={() => auth.signOut()}>Sign Out</button>
+    <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
   )
 }
 
-function Chatroom() {
+function ChatRoom() {
   const messagesRef = firestore.collection("messages")
   const query = messagesRef.orderBy('createdAt').limit(25)
   const [messages] = useCollectionData(query, {idField: 'id'})
 
   return (
     <>
-      <div>
-        {messages && messages .map((msg) => {<ChatMessage key={msg.id} message={msg} /> })}
+      <div className="find-me">
+        {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
       </div>
     </>
   )
@@ -62,7 +74,7 @@ function Chatroom() {
 function ChatMessage(props) {
   const { text, uid } = props.message
   return (
-    <p>{text}</p>
+    <p className="text">{text}</p>
   )
 }
 
