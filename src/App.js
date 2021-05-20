@@ -64,7 +64,7 @@ function ChatRoom() {
 
   return (
     <>
-      <div className="find-me">
+      <div className="msg-container">
         {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
       </div>
     </>
