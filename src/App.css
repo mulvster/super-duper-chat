@@ -9,7 +9,7 @@ body {
 }
 
 .App header {
-  background-color: #181717;
+  background-color: #FF66B6;
   height: 10vh;
   min-height: 50px;
   color: white;
@@ -30,7 +30,7 @@ body {
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
-  background-color: rgb(40, 37, 53);
+  background-color:#F603A3;
 }
 
 main {
@@ -75,7 +75,7 @@ input {
   line-height: 1.5;
   width: 100%;
   font-size: 1.5rem;
-  background: rgb(58, 58, 58);
+  background: #FFB0DE;
   color: white;
   outline: none;
   border: none;
@@ -99,16 +99,12 @@ button:disabled {
   cursor: not-allowed;
 }
 
-
 .sign-in {
   color: #282c34;
   background: white;
   max-width: 400px;
   margin: 0 auto;
 }
-
-
-
 
 ul, li {
   text-align: left;
@@ -131,7 +127,6 @@ p {
   align-items: center;
 }
 
-
 .sent {
   flex-direction: row-reverse;
 }
@@ -146,10 +141,8 @@ p {
   color: black;
 }
 
-.find-me {
-  background-color: lime;
+.msg-container {
+  padding: 5rem;
 }
 
-.text  {
-  color: rebeccapurple;
-}
+
