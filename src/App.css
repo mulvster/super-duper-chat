@@ -83,7 +83,7 @@ input {
 }
 
 button {
-  background-color: #282c34; /* Green */
+  background-color: rgb(56, 56, 143); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -100,7 +100,7 @@ button:disabled {
 }
 
 .sign-in {
-  color: #282c34;
+  color: rgb(56, 56, 143);
   background: white;
   max-width: 400px;
   margin: 0 auto;

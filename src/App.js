@@ -38,7 +38,7 @@ function App() {
   )
 }
 
-function SignIn() {
+const SignIn = () => {
 
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -51,13 +51,13 @@ function SignIn() {
   )
 }
 
-function SignOut() {
+const SignOut = () => {
   return auth.currentUser && (
     <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
   )
 }
 
-function ChatRoom() {
+const ChatRoom = () => {
   const messagesRef = firestore.collection("messages")
   const query = messagesRef.orderBy('createdAt').limit(25)
   const [messages] = useCollectionData(query, {idField: 'id'})
@@ -72,7 +72,6 @@ function ChatRoom() {
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      // photoUrl
     })
     setFormValue('')
   }
@@ -91,14 +90,13 @@ function ChatRoom() {
   )
 }
 
-function ChatMessage(props) {
+const ChatMessage = props => {
   const { text, uid  } = props.message
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received'
 
   return (
     <>
       <div className={`message ${messageClass}`}>
-        {/* <img src={photoUrl} /> */}
         <p className="text">{text}</p>
       </div>
     </>
