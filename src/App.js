@@ -61,20 +61,33 @@ function ChatRoom() {
   const messagesRef = firestore.collection("messages")
   const query = messagesRef.orderBy('createdAt').limit(25)
   const [messages] = useCollectionData(query, {idField: 'id'})
+  const [formValue, setFormValue] = useState('')
 
   return (
     <>
       <div className="msg-container">
         {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
       </div>
+
+      <form onSubmit={sendMessage}>
+        <input value={formValue} onChange={(ev) => setFormValue(ev.target.value)} />
+        <button type="submit">Send Message</button>
+      </form>
     </>
   )
 }
 
 function ChatMessage(props) {
-  const { text, uid } = props.message
+  const { text, uid, photoUrl } = props.message
+  const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received'
+
   return (
-    <p className="text">{text}</p>
+    <>
+      <div className={`message ${messageClass}`}>
+        <img src={photoUrl} />
+        <p className="text">{text}</p>
+      </div>
+    </>
   )
 }
 
